@@ -39,10 +39,6 @@ def workexperience(request):
         workjsStr = json.dumps(list_workexp)
         return HttpResponse(workjsStr)
 
-def project(request):
-    '''项目经验'''
-    pass
-
 
 def contactme(request):
     '''联系我'''
