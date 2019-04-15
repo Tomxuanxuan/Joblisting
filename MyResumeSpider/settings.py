@@ -81,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'MyResume',
-        'USER': 'root',
-        'PASSWORD': 'ake123456',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
+        'USER': 'XXXX',
+        'PASSWORD': 'XXXXXX',
+        'HOST': 'XXXXX',
+        'PORT': XXX,
     }
 }
 
