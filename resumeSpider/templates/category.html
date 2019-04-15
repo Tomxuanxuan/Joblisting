@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}
+		<title>Job Listing</title>
+{% endblock %}
+
+
+{% block search %}
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								职位 信息
+							</h1>	
+							<p class="text-white link-nav"><a href="">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Job category</a></p>
+						</div>
+
+					</div>
+				</div>
+			</section>
+              <!-- End banner Area -->
+              <!--search-->
+
+              <div class="container">
+
+              <div class="banner-content col-lg-12">
+              <form action="/job/search" class="serach-form-area" method="post">
+                  {% csrf_token %}
+                  <div class="row justify-content-center form-wrap">
+                  <div class="col-lg-4 form-cols">
+                      <input type="text" class="form-control" name="search" placeholder="python 西湖">
+                  </div>
+
+
+                  <div class="col-lg-2 form-cols">
+                      <button type="submit" class="btn btn-info">
+                          <span class="lnr lnr-magnifier"></span> Search
+                      </button>
+                  </div>
+								</div>
+							</form>
+              </div>
+
+              </div>
+
+
+              <!--end search-->
+
+{% endblock %}
+			
+			<!-- Start post Area -->
+<!--
+			<section class="post-area section-gap">
+				<div class="container">
+					<div class="row justify-content-center d-flex">
+					-->
+                    {% block post-list %}
+						<div class="col-lg-8 post-list">
+                            {% for job in list_brief %}
+							    <div class="single-post d-flex flex-row">
+								<div class="thumb">
+                                    <div style="width: 130px;height:85px;">
+                                        {% if job.companyLogo %}
+									        <img style="width:100%;height:100%;" src="{{ job.companyLogo }}" alt="">
+                                            {% else %}
+                                            <img style="width:100%;height:100%;" src="/static/jobspider/img/post.png" alt="">
+                                        {% endif %}
+                                    </div>
+									<ul class="tags">
+                                        {% for jobTag in dic_brief.jobTag %}
+										<li>
+											<a href="#">{{ jobTag }}</a>
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
+								<div class="details">
+									<div class="title d-flex flex-row justify-content-between">
+										<div class="titles">
+											<a href="/job/single?job={{ job.positionURL }}"><h4>{{ job.jobName }}</h4></a>
+											<h6>{{ job.jobType }}</h6>
+										</div>
+										<ul class="btns">
+
+											<li><a href="#">Apply</a></li>
+										</ul>
+									</div>
+									<p>
+										{{ job.companyname }}
+									</p>
+                                    <p>
+										公司人数：{{ job.companysize }}
+									</p>
+                                    <p>
+										公司性质：{{ job.companytype }}
+									</p>
+									<h5>更新时间: {{ job.updateDate }}</h5>
+									<p class="address"><span class="lnr lnr-map"></span> {{ job.businessArea }}</p>
+									<p class="address"><span class="lnr lnr-database"></span> {{ job.salary }}</p>
+								</div>
+							</div>
+                            {% endfor %}
+
+
+                            <div class="tagsPage">
+                                {% if flag == 'search' %}
+                                      <form action="/job/search" name="myform" method="get">
+                                         {% csrf_token %}
+
+                        共 <font color="red">{{ count }}</font> 条记录 共 <font color="red">{{ last_page }}</font> 页 当前第 <font color="red">{{ page }}</font> 页 &nbsp;&nbsp;&nbsp;
+                        <a href="/job/search?search={{ key }}&page={{ first_page }}">首页</a>
+                        <a class="num" href="/job/search?search={{ key }}&page={{ prev_page }}">上一页</a>
+                        <a class="num" href="/job/search?search={{ key }}&page={{ next_page }}">下一页</a>
+                        <a class="num" href="/job/search?search={{ key }}&page={{ last_page }}">末页</a>
+
+                    </form>
+                                    {% else %}
+                    <form action="/job" name="myform" method="post">
+                        {% csrf_token %}
+                        共 <font color="red">{{ count }}</font> 条记录 共 <font color="red">{{ last_page }}</font> 页 当前第 <font color="red">{{ page }}</font> 页 &nbsp;&nbsp;&nbsp;
+                        <a href="/job?page={{ first_page }}">首页</a>
+                        <a class="num" href="/job?page={{ prev_page }}">上一页</a>
+                        <a class="num" href="/job?page={{ next_page }}">下一页</a>
+                        <a class="num" href="/job?page={{ last_page }}">末页</a>
+                        转到：
+                        <input type="text" value="{{ prev_page }}" name="page" class="text">&nbsp;
+                        <input class="btnn" type="submit" value="GO" name="sb">
+                    </form>
+                          {% endif %}
+              </div>
+
+						</div>
+                    {% endblock %}
+
+<!--地址-->
+ {% block address %}
+                    {% if flag == 'search' %}
+
+                    {% else %}
+							<div class="single-slidebar">
+								<h4>地址</h4>
+								<ul class="cat-list">
+                                    {% for add in addressNum %}
+									<li><a class="justify-content-between d-flex" href="category.html"><p>{{ add.businessArea }}</p><span>{{ add.count }}</span></a></li>
+                                    {% endfor %}
+
+								</ul>
+							</div>
+
+                    {% endif %}
+ {% endblock %}
+
+

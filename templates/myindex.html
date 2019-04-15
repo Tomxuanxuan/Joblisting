@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../static/css/font-awesome.css" rel="stylesheet">
+<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+
+    <link rel="stylesheet" href="/static/js/hoverGrid.js">
+    <link rel="stylesheet" href="/static/css/hoverGrid.css">
+<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+<!-- //js -->
+
+<link href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+
+
+<!-- start-smooth-scrolling -->
+<script type="text/javascript" src="../static/js/move-top.js"></script>
+<script type="text/javascript" src="../static/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smooth-scrolling -->
+    <style>
+        .self-evaluation{
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+	
+<body>
+<!-- banner -->
+	<div class="banner-figures">
+		<div class="banner">
+			<div class="container banner-drop">
+				<div class="header">
+					<div class="header-left logo">
+						<h1><a href="/job">My Resume</a></h1>
+					</div>
+					<div class="header-right">
+						<nav>
+						  <ul>
+							<li class="active">
+								<a href="index.html" class="active"><span>Home</span></a>
+							</li>
+							<li>
+								<a href="#about" class="scroll"><span>About</span></a>
+							</li>
+							<li>
+								<a href="#experience" class="scroll"><span>Experience</span></a>
+							</li>
+							<li>
+								<a href="#projects" class="scroll"><span>Projects</span></a>
+							</li>
+							<li>
+								<a href="#contact" class="scroll"><span>Contact</span></a>
+							</li>
+						  </ul>
+						</nav>
+						<div class="menu-icon animated wow zoomIn" data-wow-duration="1000ms" data-wow-delay="800ms"><span></span></div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="name" >
+					<h2>{{ myself.name.0 }}&nbsp;&nbsp;&nbsp;{{ myself.name.1 }}{{ myself.name.2 }}</h2>
+					<p> Django & Flask Development Engineer</p>
+				</div>
+				<div class="social-icons animated wow bounceInDown" data-wow-duration="1000ms" data-wow-delay="800ms">
+					<ul class="top-links">
+
+						<li><a href="/job"><i class="fa fa-linkedin"></i></a></li>
+
+					</ul>
+				</div>
+			</div>
+							<div class="banner-btm-grid-w3ls">
+		<div class="banner-left-wthree">
+			<img src="/{{ myself.photo }}" alt=" " class="img-responsive">
+			<ul class="address">
+					
+					<li>
+							<ul class="address-text">
+								<li><b>NAME</b></li>
+								<li>: {{ myself.name }}</li>
+							</ul>
+						</li>
+						<li>
+							<ul class="address-text">
+								<li><b>D.O.B</b></li>
+								<li>: {{ myself.birth_time }}</li>
+							</ul>
+						</li>
+						<li>
+							<ul class="address-text">
+								<li><b>ADDRESS </b></li>
+								<li>: {{ myself.address }}</li>
+							</ul>
+						</li>
+						<li>
+							<ul class="address-text">
+								<li><b>E-MAIL </b></li>
+								<li><a href="mailto:example@mail.com">: {{ myself.email }}</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+		</div>
+		<div class="banner-right-w3-agileits">
+            <div id="whatever">
+
+								    <div class="item">
+								        <img  src="/static/images/txxp.jpg" title="name" />
+								        <div class="caption" style="display: none;" >
+                                            <h2 ><a href="http://www.tx-xp.top" style="color: #ffffff;">个人 主站</a></h2>
+                                            <p><a href="http://www.tx-xp.top">www.tx-xp.top</a></p>
+								        </div>
+								    </div>
+
+		</div>
+            </div>
+                                <script src="/static/js/hoverGrid.js"></script>
+					<link rel="stylesheet" type="text/css" href="/static/css/hoverGrid.css">
+					<script type="text/javascript">
+					    $(document).ready(function() {
+					      $('#whatever').hoverGrid();
+					    });
+					</script>
+
+		<div class="clearfix"></div>
+	</div>
+		</div>
+			<script>
+				(function($){
+				  $(".menu-icon").on("click", function(){
+						$(this).toggleClass("open");
+						$(".container").toggleClass("nav-open");
+						$("nav ul li").toggleClass("animate");
+				  });
+				  
+				})(jQuery);
+			</script>
+		
+	</div>
+
+<!-- //banner -->
+<!-- about -->
+<div class="about" id="about">
+<div class="self-evaluation" id="about">
+	<div class="container">
+		<span class="about-top-w3">Education</span>
+		<h4 class="title-w3ls">教育背景</h4>
+		<p class="para-w3-agile">{{ myself.university }} &nbsp;&nbsp;&nbsp; {{ myself.major }} &nbsp;&nbsp;&nbsp; {{ myself.edu }}</p>
+        <p class="para-w3-agile">所获荣誉:</p>
+        <p class="para-w3-agile">{{ myself.honortitle }}</p>
+
+	</div>
+</div>
+
+	<div class="container">
+		<div class="skills-bar">
+            <span class="about-top-w3">My Skill</span>
+		<h4 class="title-w3ls">专业 技能</h4>
+            <div class="skill-md-6 news-right">
+                <ul>
+                    {% for skill in skills %}
+                        {% if forloop.counter <= 4 %}
+                            <li>{{ skill.skillinfo }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="skill-md-6 news-right">
+                 <ul>
+                    {% for skill in skills %}
+                        {% if forloop.counter > 4 %}
+                            <li>{{ skill.skillinfo }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+            </div>
+		</div>
+	</div>
+</div>
+<!-- //about -->
+<!--work-experience-->
+	<div id="experience" class="experience">
+		<div class="container">
+		<span class="about-top-w3">Work Experience</span>
+			<h4 class="title-w3ls">工作 经历</h4>
+            <div id="insertworkexp">
+
+               <!--
+			<div class="work-info"> 
+				<div class="col-md-6 work-right work-right2"> 
+					<h4>  work.worktime  </h4>
+				</div>
+				<div class="col-md-6 work-left work-left2"> 
+					<h5>  work.company  <span class="glyphicon glyphicon-briefcase"> </span></h5>
+					<p> work.responsibility  </p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			-->
+                    </div>
+		</div>
+
+        <script>
+
+            $.get('/resume/workexp?user={{ request.session.user_id }}', function (data) {
+                $.each(data, function (i, obj) {
+                    if(i % 2 == 0){
+                        $("#insertworkexp").append(addwork1(obj))
+                    }
+                    else{
+                        $("#insertworkexp").append(addwork2(obj))
+                    }
+                })
+            }, "json");
+
+            function addwork2(obj) {
+                var html2 = '<div class="work-info"> \n' +
+                    '\t\t\t\t<div class="col-md-6 work-left"> \n' +
+                    '\t\t\t\t\t<h4>' + obj.worktime + ' </h4>\n' +
+                    '\t\t\t\t</div>\n' +
+                    '\t\t\t\t<div class="col-md-6 work-right"> \n' +
+                    '\t\t\t\t\t<h5><span class="glyphicon glyphicon-briefcase"> </span> ' + obj.company + '</h5>\n' +
+                    '\t\t\t\t\t<p>' + obj.responsibility + '</p>\n' +
+                    '\t\t\t\t</div>\n' +
+                    '\t\t\t\t<div class="clearfix"> </div>\n' +
+                    '\t\t\t</div>';
+                return html2
+            }
+            function addwork1(obj) {
+                var html1 = '<div class="work-info"> \n' +
+                    '\t\t\t\t<div class="col-md-6 work-right work-right2"> \n' +
+                    '\t\t\t\t\t<h4> '+ obj.worktime +' </h4>\n' +
+                    '\t\t\t\t</div>\n' +
+                    '\t\t\t\t<div class="col-md-6 work-left work-left2"> \n' +
+                    '\t\t\t\t\t<h5> '+ obj.company  +'<span class="glyphicon glyphicon-briefcase"> </span></h5>\n' +
+                    '\t\t\t\t\t<p> '+ obj.responsibility +' </p>\n' +
+                    '\t\t\t\t</div>\n' +
+                    '\t\t\t\t<div class="clearfix"> </div>\n' +
+                    '\t\t\t</div>';
+                return html1
+            }
+        </script>
+
+	</div>
+	<!--//work-experience-->
+<!-- projects -->
+<div class="projects" id="projects">
+	<div class="container">
+	<span class="about-top-w3">The best of my projects </span>
+		<h4 class="title-w3ls">项目 经验</h4>
+		<div class="news-bottom">
+				<div class="news-one-wthree-agile">
+					<div class="col-md-6 news-left">
+						        <div class="biseller-column">
+										<a class="lightbox" href="#one">
+											<img src="../{{ project.0.pro_photo }}" alt=""/>
+										</a> 
+										<div class="lightbox-target" id="one">
+										 <img src="../{{ project.0.pro_photo }}" alt=""/>
+										 <p class="pop">{{ project.0.pro_responsibility }}</p>
+										   <a class="lightbox-close" href="#"> </a>
+											
+											<div class="clearfix"> </div>
+											
+										</div>
+							   </div>
+
+					</div>	
+					<div class="col-md-6 news-right"> 
+					<a href="#one"><h4>{{ project.0.pro_name }}</h4></a>
+						<p class="para-w3-agile">{{ project.0.pro_brief }}</p>
+					</div>	
+					<div class="clearfix"> </div>	
+				</div>
+
+				<div class="news-one-wthree-agile">
+					<div class="col-md-6 news-right"> 
+						<a href="#three"><h4>{{ project.1.pro_name }}</h4></a>
+						<p class="para-w3-agile">{{ project.1.pro_brief }}</p>
+					</div>	
+					<div class="col-md-6 news-left">
+						 <div class="biseller-column">
+										<a class="lightbox" href="#three">
+											<img src="../static/images/p2.jpg" alt=""/>
+										</a>
+										<div class="lightbox-target" id="three">
+										 <img src="../static/images/p2.jpg" alt=""/>
+										 <p class="pop">{{ project.1.pro_responsibility }}</p>
+										   <a class="lightbox-close" href="#"> </a>
+
+											<div class="clearfix"> </div>
+										</div>
+							</div>
+
+					</div>						
+					<div class="clearfix"> </div>
+	            </div>
+
+            <div class="news-one-wthree-agile">
+					<div class="col-md-6 news-left">
+						        <div class="biseller-column">
+										<a class="lightbox" href="#two">
+											<img src="../{{ project.2.pro_photo }}" alt=""/>
+										</a>
+										<div class="lightbox-target" id="two">
+										 <img src="../{{ project.2.pro_photo }}" alt=""/>
+										 <p class="pop">{{ project.2.pro_responsibility }}</p>
+										   <a class="lightbox-close" href="#"> </a>
+
+											<div class="clearfix"> </div>
+
+										</div>
+							   </div>
+
+					</div>
+					<div class="col-md-6 news-right">
+					<a href="#two"><h4>{{ project.2.pro_name }}</h4></a>
+						<p class="para-w3-agile">{{ project.2.pro_brief }}</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+</div>
+
+<!-- //projects -->
+
+<div class="self-evaluation" id="about">
+	<div class="container">
+		<span class="about-top-w3">Who I am?</span>
+		<h4 class="title-w3ls">个人评价</h4>
+		<p class="para-w3-agile">{{ myself.aboutme }} </p>
+
+	</div>
+</div>
+
+<!-- contact -->
+<div class="contact" id="contact">
+	<div class="container">
+	<span class="about-top-w3">Send me a message</span>
+		<h4 class="title-w3ls">联系我</h4>
+		<div class="col-md-5 contact-agileits-w3layouts">
+		<form action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+				<input type="text" name="YName" placeholder="姓名" required="" />
+				<input type="email" name="YEmail" placeholder="邮箱" required="" />
+				<input type="text" Name="PNumber" placeholder="电话" required=""/>
+				<textarea name="Message" placeholder="内容" required></textarea>
+				<input type="submit" value="提交">
+			</form>
+			<h5 class="sub">Looking for Address</h5>
+			<p><span>Location</span> : {{ myself.address }}</p>
+			<p><span>Phone</span> : {{ myself.phone }}</p>
+			<p><span>Email</span><a href="mailto:{{ myself.email }}"> : {{ myself.email }}</a></p>
+		</div>
+
+
+		<div class="col-md-7 contact-map-right">
+		<div id="map"></div>
+
+
+		</div>
+	</div>
+</div>
+<!-- //about -->
+
+	<div class="footer">
+		<div class="container">
+			<p>Copyright &copy; <script>document.write(new Date().getFullYear());</script>.Company name xuantang <a href="http://www.tx-xp.top/" target="_blank" title="简历">my resume</a> - Collect from <a href="" title="网页模板" target="_blank">简历</a></p>
+		</div>
+	</div>
+<!-- //footer -->
+<script src="../static/js/bars.js"></script>
+
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>

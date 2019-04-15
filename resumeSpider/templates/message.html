@@ -1,0 +1,54 @@
+	{% extends 'base.html' %}
+{% block title %}
+		<title>Message</title>
+{% endblock %}
+
+{% block search %}
+	<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								留言信息
+							</h1>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->
+{% endblock %}
+
+
+			<!-- Start blog-posts Area -->
+{#			<section class="blog-posts-area section-gap">#}
+{#				<div class="container">#}
+{#					<div class="row">#}
+                        {% block post-list %}
+
+						<div class="col-lg-8 post-list single-post">
+							<div class="single-post">
+
+
+								<ul class="mestags">
+									<li><a href="#">留言时间：{{ message.con_time }} </a></li>
+                                    <li><a href="#">姓名：{{ message.con_name }} </a></li>
+                                    <li><a href="#">邮箱：{{ message.con_email }} </a></li>
+                                    <li><a href="#">手机：{{ message.con_number }} </a></li>
+
+								</ul><br>
+									<h3>
+									{{ message.con_message }}
+                                    </h3>
+
+							</div>
+
+						</div>
+                          {% endblock %}
+
+			<!-- End blog-posts Area -->
+
+
+

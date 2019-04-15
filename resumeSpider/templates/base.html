@@ -1,0 +1,228 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="/static/jobspider/img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+
+        {% block title %}
+		<title>base</title>
+        {% endblock %}
+
+
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="/static/jobspider/css/linearicons.css">
+			<link rel="stylesheet" href="/static/jobspider/css/font-awesome.min.css">
+			<link rel="stylesheet" href="/static/jobspider/css/bootstrap.css">
+			<link rel="stylesheet" href="/static/jobspider/css/magnific-popup.css">
+			<link rel="stylesheet" href="/static/jobspider/css/nice-select.css">
+			<link rel="stylesheet" href="/static/jobspider/css/animate.min.css">
+			<link rel="stylesheet" href="/static/jobspider/css/owl.carousel.css">
+			<link rel="stylesheet" href="/static/jobspider/css/main.css">
+		</head>
+		<body>
+
+			  <header id="header" id="home">
+			    <div class="container">
+			    	<div class="row align-items-center justify-content-between d-flex">
+				      <div id="logo">
+				        <a href="/job"><img src="/static/jobspider/img/logo.png" alt="" title="" /></a>
+				      </div>
+				      <nav id="nav-menu-container">
+				        <ul class="nav-menu">
+				          <li><a href="/resume">关于我</a></li>
+				          <li><a href="/job">职位</a></li>
+				          <li><a href="{% url 'jobcontact' %}">联系我</a></li>
+				          <li class="menu-has-children"><a href="/job/analyze">数据分析</a>
+                          </li>
+
+                            {% if request.session.user_id %}
+                                <li><a href="/admin">欢迎：{{ request.session.name }}</a></li>
+                                {% else %}
+				          <li><a class="ticker-btn" href="/resume/login">登录</a></li>
+                            {% endif %}
+                        <li><a class="ticker-btn" href="{% url 'logout' %}">退出</a></li>
+				        </ul>
+				      </nav><!-- #nav-menu-container -->
+			    	</div>
+			    </div>
+			  </header><!-- #header -->
+
+                {% block search %}
+                {% endblock %}
+
+{% block main %}
+{% endblock %}
+
+
+			<!-- Start post Area -->
+			<section class="post-area section-gap">
+				<div class="container">
+					<div class="row justify-content-center d-flex">
+
+                 
+                    {% block post-list %}
+                    {% endblock %}
+                 
+{% block sidebar %}
+						<div class="col-lg-4 sidebar">
+
+							<div class="single-slidebar">
+								<h4>岗位</h4>
+								<ul class="cat-list">
+                                    <li><a class="justify-content-between d-flex" href="/job/search?search=python开发"><p>python开发</p><span>{{ dic_slidebar.pydevelop }}</span></a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=开发"><p>开发</p><span></span>{{ dic_slidebar.develop }}</a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=运维"><p>运维</p><span>{{ dic_slidebar.operation }}</span></a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=测试"><p>测试</p><span>{{ dic_slidebar.test }}</span></a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=人工智能"><p>人工智能</p><span>{{ dic_slidebar.artificialintelligence }}</span></a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=大数据"><p>大数据</p><span>{{ dic_slidebar.largedata }}</span></a></li>
+									<li><a class="justify-content-between d-flex" href="/job/search?search=产品"><p>产品</p><span>{{ dic_slidebar.product }}</span></a></li>
+                                    <li><a class="justify-content-between d-flex" href="/job/search?search=other"><p>其他</p><span>{{ dic_slidebar.others }}</span></a></li>
+								</ul>
+							</div>
+
+                        {% block address %}
+
+                            {% endblock %}
+
+                            <script src="/static/jobspider/js/jquery-1.11.3.js">
+
+                              window.onload = function () {
+                                  $.get('/job/slidebar', function (data) {
+                                      alert(data)
+                                  })
+                              }
+
+
+
+                            </script>
+                        
+							<div class="single-slidebar">
+								<h4>Carrer Advice Blog</h4>
+								<div class="blog-list">
+									<div class="single-blog " style="background:#000 url(/static/jobspider/img/blog1.jpg);">
+										<a href=""><h4>Home Audio Recording <br>
+										For Everyone</h4></a>
+										<div class="meta justify-content-between d-flex">
+											<p>
+												02 Hours ago
+											</p>
+											<p>
+												<span class="lnr lnr-heart"></span>
+												06
+												 <span class="lnr lnr-bubble"></span>
+												02
+											</p>
+										</div>
+									</div>
+									<div class="single-blog " style="background:#000 url(/static/jobspider/img/blog2.jpg);">
+										<a href=""><h4>Home Audio Recording <br>
+										For Everyone</h4></a>
+										<div class="meta justify-content-between d-flex">
+											<p>
+												02 Hours ago
+											</p>
+											<p>
+												<span class="lnr lnr-heart"></span>
+												06
+												 <span class="lnr lnr-bubble"></span>
+												02
+											</p>
+										</div>
+									</div>
+									<div class="single-blog " style="background:#000 url(/static/jobspider/img/blog1.jpg);">
+										<a href=""><h4>Home Audio Recording <br>
+										For Everyone</h4></a>
+										<div class="meta justify-content-between d-flex">
+											<p>
+												02 Hours ago
+											</p>
+											<p>
+												<span class="lnr lnr-heart"></span>
+												06
+												 <span class="lnr lnr-bubble"></span>
+												02
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+{% endblock %}
+					</div>
+				</div>
+			</section>
+			<!-- End post Area -->
+
+
+			<!-- Start callto-action Area -->
+              {% if request.session.user_id %}
+			<section class="callto-action-area section-gap">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content col-lg-9">
+							<div class="title text-center">
+								<h1 class="mb-10 text-white">点击更新职位数据</h1>
+								<p class="text-white">欢迎 {{ request.session.name }}</p>
+								<a class="primary-btn" href="/job/updatejobs">更新</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+                  {% else %}
+                  <section class="callto-action-area section-gap"></section>
+              {% endif %}
+			<!-- End calto-action Area -->
+
+			<!-- start footer Area -->
+			<footer class="footer-area section-gap">
+				<div class="container">
+
+
+					<div class="row footer-bottom d-flex justify-content-between">
+						<p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+
+Copyright &copy;<script>document.write(new Date());</script> <a href="" target="_blank" title=""></a> <a href="" title="" target="_blank"></a>
+						</p>
+
+					</div>
+				</div>
+			</footer>
+			<!-- End footer Area -->
+
+			<script src="/static/jobspider/js/vendor/jquery-2.2.4.min.js"></script>
+              <script src="/static/jobspider/js/jquery-1.11.3.js"></script>
+{##}
+{#			<script src="/static/jobspider/js/vendor/bootstrap.min.js"></script>#}
+{#			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>#}
+{#  			<script src="/static/jobspider/js/easing.min.js"></script>#}
+{#			<script src="/static/jobspider/js/hoverIntent.js"></script>#}
+{#			<script src="/static/jobspider/js/superfish.min.js"></script>#}
+{#			<script src="/static/jobspider/js/jquery.ajaxchimp.min.js"></script>#}
+{#			<script src="/static/jobspider/js/jquery.magnific-popup.min.js"></script>#}
+{#			<script src="/static/jobspider/js/owl.carousel.min.js"></script>#}
+{#			<script src="/static/jobspider/js/jquery.sticky.js"></script>#}
+{##}
+{#			<script src="/static/jobspider/js/parallax.min.js"></script>#}
+{#			<script src="/static/jobspider/js/mail-script.js"></script>#}
+{#			<script src="/static/jobspider/js/main.js"></script>#}
+		</body>
+	</html>
+
+
+

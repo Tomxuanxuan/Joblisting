@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>analyze</title>
+    <!-- Bootstrap Styles-->
+    <link href="/static/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="/static/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="/static/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="/static/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<style>
+    .showmore{
+        background-color: #aad1dc;
+        color: #fff;
+        border-top:0px solid #fff;
+        width: 1495px;
+        height: 25px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 10px;
+        display: table-cell;
+        vertical-align: middle;
+
+    }
+    .arrow-down{
+        /*下箭头*/
+        width: 0;
+        height: 0;
+        border-left:10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #145791;
+        float: right;
+        margin-top: 4px;
+    }
+     .arrow-up{
+         /*上箭头*/
+        width: 0;
+        height: 0;
+        border-left:10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #145791;
+        float: right;
+        margin-top: 4px;
+    }
+    .fontshow{
+        float: left;
+    }
+    .all-arrow-down{
+        width: 70px;
+        display: inline-block;
+    }
+</style>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/job" id="testjs">数据分析</a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        {% for mes in message %}
+                        <li>
+                            <a href="/job/message?mesid={{ mes.id }}">
+                                <div>
+                                    <strong>{{ mes.con_name }}</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>{{ mes.con_time }}</em>
+                                    </span>
+                                </div>
+                                <div>{{ mes.con_message|truncatechars:80}}</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        {% endfor %}
+
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            岗位信息统计 <small>Summary of the list</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div id="row1">
+                <div class="row">
+                    {% for posmoney in money_list %}
+                        {% if forloop.counter0 < 4 %}
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div id="moneydiv" class="panel panel-primary text-center no-boder bg-color-blue">
+                            <div class="panel-body">
+
+                                <i class="fa fa-5x">{{ posmoney.name }}</i>
+                                <h3>平均薪资：{{ posmoney.money.2 }}K</h3>
+                            </div>
+                            <div class="panel-footer back-footer-blue">
+                                最低:{{ posmoney.money.0 }}K  &nbsp; 最高:{{ posmoney.money.1 }}K
+
+                            </div>
+                        </div>
+                    </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="showmore"><div class="all-arrow-down" style="cursor: pointer;" onclick="row1('show')"><div class="fontshow" >展示更多</div><div class="arrow-down"></div></div></div>
+                </div>
+                <div id="row2" style="display: none;">
+                <div class="row">
+                    {% for posmoney in money_list %}
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div id="moneydiv" class="panel panel-primary text-center no-boder bg-color-blue">
+                            <div class="panel-body">
+
+                                <i class="fa fa-5x">{{ posmoney.name }}</i>
+                                <h3>平均薪资：{{ posmoney.money.2 }}K</h3>
+                            </div>
+                            <div class="panel-footer back-footer-blue">
+                                最低:{{ posmoney.money.0 }}K  &nbsp; 最高:{{ posmoney.money.1 }}K
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="showmore"><div class="all-arrow-down" style="cursor: pointer;" onclick="row1('hide')"><div class="fontshow"  >隐藏信息</div><div class="arrow-up"></div></div></div>
+                </div>
+                <script>
+                    function row1(data) {
+                        if (data == 'show'){
+                            $("#row1").attr('style','display:none;'); /*添加样式，隐藏 div*/
+                            $("#row2").removeAttr('style', 'display:none;')   /*删除样式，显示 div*/
+                        }
+                        else {
+                            $("#row2").attr('style','display:none;'); /*添加样式，隐藏 div*/
+                            $("#row1").removeAttr('style', 'display:none;')   /*删除样式，显示 div*/
+                        }
+                    }
+                </script>
+                <div class="row">
+
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                岗位统计
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                学历要求
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /. ROW  -->
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                岗位位置分布
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                <div id="areadiv">
+                                  {% for address in list_area %}
+                                      {% if forloop.counter0 < 11 %}
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">{{ address.areaNum }}</span>
+                                        <i class="fa fa-fw fa-globe"></i> {{ address.businessArea }}
+                                    </a>
+                                      {% endif %}
+                                  {% endfor %}
+                                  </div>
+                                <div id="areadiv2" style="display: none">
+                                    {% for address in list_area %}
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">{{ address.areaNum }}</span>
+                                        <i class="fa fa-fw fa-globe"></i> {{ address.businessArea }}
+                                    </a>
+
+                                    {% endfor %}
+                                </div>
+
+                                </div>
+                                <div class="text-right">
+                                    <a id="more" style="cursor: pointer" onclick="moreareainfo()">查看更多<i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                                <script>
+                                    flag = true;
+                                    function moreareainfo() {
+                                        if (flag){
+                                            flag = false;
+                                            $("#areadiv").attr('style','display:none');
+                                            $("#areadiv2").removeAttr('style','display:none');
+                                            $("#more").text('隐藏更多')
+                                        }
+                                        else {
+                                            flag = true;
+                                            $("#areadiv").removeAttr('style','display:none');
+                                            $("#areadiv2").attr('style','display:none')
+                                            $("#more").text('查看更多')
+
+                                        }
+
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Responsive Table Example
+                            </div> 
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>岗位名称</th>
+                                                <th>岗位数量</th>
+                                                <th>最低薪资</th>
+                                                <th>最高薪资</th>
+                                                <th>平均薪资</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for postion in money_list %}
+                                            <tr>
+                                                <td>{{ postion.name }}</td>
+                                                <td>{{ postion.posNum }}</td>
+                                                <td>{{ postion.money.0 }}K</td>
+                                                <td>{{ postion.money.1 }}K</td>
+                                                <td>{{ postion.money.2 }}K</td>
+                                            </tr>
+                                           {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<footer><p> <a href="" target="_blank" title=""></a>  <a href="" title="" target="_blank"></a></p></footer>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+
+  {#var poslist = [];#}
+  {#          var posdict = {};#}
+  {#          {% for pos in money_dict %}#}
+  {#              posdict['y'] = {{ pos.name }};#}
+  {#              posdict['a'] = {{ pos.posNum }};#}
+  {#              posdict['b'] = {{ pos.money.1 }};#}
+  {#              poslist.append(posdict);#}
+  {#          {% endfor %}#}
+  {#  console.log(poslist);#}
+
+
+    <script src="/static/assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="/static/assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="/static/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="/static/assets/js/morris/morris.js"></script>
+    <!-- Custom Js -->
+{#    <script src="/static/assets/js/custom-scripts.js"></script>#}
+
+
+</body>
+<script>
+/*------------------------------------------------------
+    Author : www.webthemez.com
+    License: Commons Attribution 3.0
+    http://creativecommons.org/licenses/by/3.0/
+---------------------------------------------------------  */
+
+(function ($) {
+       $("#testjs").val("abcd");
+    "use strict";
+    var mainApp = {
+
+        initFunction: function () {
+            /*MENU
+            ------------------------------------*/
+            $('#main-menu').metisMenu();
+
+            $(window).bind("load resize", function () {
+                if ($(this).width() < 768) {
+                    $('div.sidebar-collapse').addClass('collapse')
+                } else {
+                    $('div.sidebar-collapse').removeClass('collapse')
+                }
+            });
+
+            /* MORRIS BAR CHART
+			-----------------------------------------*/
+
+            var poslist = [];
+            {% for pos in money_list %}
+                var posdict = {};
+                posdict['y'] = '{{ pos.name }}';
+                posdict['a'] = {{ pos.posNum }};
+                posdict['b'] = {{ pos.money.2 }};
+                poslist.push(posdict);
+            {% endfor %}
+
+            Morris.Bar({
+                element: 'morris-bar-chart',
+                data: poslist,
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['岗位数量', '平均薪资(K)'],
+                hideHover: 'auto',
+                resize: true
+            });
+
+            /* MORRIS DONUT CHART
+			----------------------------------------*/
+            var list_edu = [];
+
+            {% for edu in list_eduNum %}
+                var dic_edu =  {};
+                dic_edu['label'] = "{{ edu.edu }}"
+                dic_edu['value'] = {{ edu.num }}
+                list_edu.push(dic_edu);
+            {% endfor %}
+            {#var edus = [{#}
+            {#        label: {{ list_eduNum.0.edu }},#}
+            {#        value: {{ list_eduNum.0.num }}#}
+            {#    }, {#}
+            {#        label: "In-Store Sales",#}
+            {#        value: 40#}
+            {#    }, {#}
+            {#        label: "Mail-Order Sales",#}
+            {#        value: 20#}
+            {#    }];#}
+            Morris.Donut({
+                element: 'morris-donut-chart',
+                data: list_edu,
+                resize: true
+            });
+
+            /* MORRIS AREA CHART
+			----------------------------------------*/
+
+            Morris.Area({
+                element: 'morris-area-chart',
+                data: [{
+                    period: '2010 Q1',
+                    iphone: 2666,
+                    ipad: null,
+                    itouch: 2647
+                }, {
+                    period: '2010 Q2',
+                    iphone: 2778,
+                    ipad: 2294,
+                    itouch: 2441
+                }, {
+                    period: '2010 Q3',
+                    iphone: 4912,
+                    ipad: 1969,
+                    itouch: 2501
+                }, {
+                    period: '2010 Q4',
+                    iphone: 3767,
+                    ipad: 3597,
+                    itouch: 5689
+                }, {
+                    period: '2011 Q1',
+                    iphone: 6810,
+                    ipad: 1914,
+                    itouch: 2293
+                }, {
+                    period: '2011 Q2',
+                    iphone: 5670,
+                    ipad: 4293,
+                    itouch: 1881
+                }, {
+                    period: '2011 Q3',
+                    iphone: 4820,
+                    ipad: 3795,
+                    itouch: 1588
+                }, {
+                    period: '2011 Q4',
+                    iphone: 15073,
+                    ipad: 5967,
+                    itouch: 5175
+                }, {
+                    period: '2012 Q1',
+                    iphone: 10687,
+                    ipad: 4460,
+                    itouch: 2028
+                }, {
+                    period: '2012 Q2',
+                    iphone: 8432,
+                    ipad: 5713,
+                    itouch: 1791
+                }],
+                xkey: 'period',
+                ykeys: ['iphone', 'ipad', 'itouch'],
+                labels: ['iPhone', 'iPad', 'iPod Touch'],
+                pointSize: 2,
+                hideHover: 'auto',
+                resize: true
+            });
+
+            /* MORRIS LINE CHART
+			----------------------------------------*/
+
+
+
+        },
+
+        initialization: function () {
+            mainApp.initFunction();
+
+        }
+
+    }
+    // Initializing ///
+
+    $(document).ready(function () {
+        mainApp.initFunction();
+    });
+
+}(jQuery));
+
+</script>
+
+</html>
